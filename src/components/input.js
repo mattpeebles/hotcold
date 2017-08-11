@@ -11,7 +11,7 @@ export default class Input extends React.Component{
 
 
 	changeGuess(e){
-		const guess = parseInt(e.target.value)
+		const guess = parseInt(e.target.value, 10)
 		this.setState({guess})
 	}
 

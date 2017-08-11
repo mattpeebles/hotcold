@@ -1,8 +1,8 @@
 import React from 'react'
 
-import History from './history'
-import Input from './input'
-import Status from './status'
+import History from './History'
+import Input from './Input'
+import Status from './Status'
 
 function random(){
 	const min = Math.ceil(1);
@@ -34,9 +34,9 @@ export default class Board extends React.Component{
 		
 		const history = this.state.history
 
-		if(!history.includes(parseInt(guess))){
+		if(!history.includes(parseInt(guess, 10))){
 			
-			history.push(parseInt(guess))
+			history.push(parseInt(guess, 10))
 
 			history.sort((a, b) => {
 				return a - b
@@ -57,13 +57,11 @@ export default class Board extends React.Component{
 		}
 
 		else if ((guess >= (targetNum - 20) && !(guess <= targetNum - 20))  && ((guess <= (targetNum + 20)) && (!(guess >= targetNum + 20)))) {
-			console.log('i called hot')
 			const status = 'Hot'
 			this.setState({status})
 		}
 
 		else if(guess <= (targetNum - 20) || guess >= (targetNum + 20)){
-			console.log('i called cold')
 			const status = 'Cold'
 			this.setState({status})
 		}
@@ -82,11 +80,11 @@ export default class Board extends React.Component{
 
 	render(){
 
-		if(this.state.status == ('Win')){
+		if(this.state.status === ('Win')){
 			return(
 				<div>
 					<h1>Great Guess! My number was {this.state.computerNumber}</h1>
-					<p>It took you {this.state.history.length} guess</p>
+					<p>It took you {this.state.history.length} guesses</p>
 					<p>Wins: {this.state.win}</p>
 					<button onClick={this.newGame.bind(this)}> Play Again? </button>
 				</div>
